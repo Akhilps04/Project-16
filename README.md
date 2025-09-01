@@ -1,10 +1,4 @@
-Got it. You want a **README.md** for your project that explains the app, folder structure, setup instructions, and also highlights that it was a **Global Nominee finalist in NASA Space Apps Challenge 2024**.
-
-Here’s a draft for your `README.md`:
-
----
-
-# Satellite Pass Notification and Data Availability System
+## Satellite Pass Notification and Data Availability System
 
 🚀 **Global Nominee – NASA Space Apps Challenge 2024**
 
@@ -103,11 +97,14 @@ The app will be available at:
 This project was selected as a **Global Nominee finalist** in the **NASA Space Apps Challenge 2024**, representing innovative use of open space and Earth data to solve real-world problems.
 
 ---
+## Acknowledgments
 
-## 📜 License
-
-MIT License – free to use and modify.
+Thanks to my mentors and colleagues for their guidance.
 
 ---
 
-Would you like me to also generate a **`requirements.txt` file** from your code so that everything installs smoothly?
+## 📜 License
+
+This project is for academic and demonstration purposes only. Please credit the authors if reused or modified.
+
+---
