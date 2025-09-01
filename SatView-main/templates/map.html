@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Satellite Coverage Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            background-color: #222222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #map {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            border: 2px solid #444444;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Satellite Coverage Map</h2>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Parse the map_data passed from Flask
+        var mapData = JSON.parse('{{ map_data | safe }}');
+        
+        // Log the values to ensure they are being passed correctly
+        console.log("Map Data:", mapData);
+
+        // Initialize the map with the dynamic latitude and longitude
+        var map = L.map('map').setView([mapData.latitude, mapData.longitude], 13);
+
+        // Use OpenStreetMap tile layer (replace with Mapbox if you have an access token)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Create a marker at the user's location
+        var marker = L.marker([mapData.latitude, mapData.longitude]).addTo(map)
+            .bindPopup('Location: (' + mapData.latitude.toFixed(4) + ', ' + mapData.longitude.toFixed(4) + ')')
+            .openPopup();
+
+        // Draw the 3x3 grid
+        mapData.surrounding_pixels.forEach(function(pixel) {
+            L.rectangle([
+                [pixel[0], pixel[1]],
+                [pixel[0] + 0.00027, pixel[1] + 0.00027]
+            ], {color: "#ff7800", weight: 1}).addTo(map);
+        });
+    </script>
+</body>
+</html>
